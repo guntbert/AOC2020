@@ -6,14 +6,17 @@ from support import timing
 
 
 def compute(s: str) -> int:
-    numbers = set()
-    for n_s in s.split():
-        n = int(n_s)
-        numbers.add(n)
-        if 2020 - n in numbers:
-            return (2020 - n) * n
-    else:
-        raise NotImplementedError
+    numbers = [int(n_s) for n_s in s.split()]
+    length = len(numbers)
+    #breakpoint()
+    for pos_n1, n1  in enumerate(numbers):
+      pos_n2 = pos_n1 + 1
+      while pos_n2 < length:
+        n2 = numbers[pos_n2]
+        if n1 + n2 == 2020:
+          return n1* n2
+        pos_n2 += 1
+         
 
 
 @pytest.mark.parametrize(
