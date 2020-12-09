@@ -22,10 +22,20 @@ INPUT_S = '''\
 '''
 
 def compute(s: str) -> int:
-    for line in s.split():
-        pass
-    # TODO: implement solution here!
-    return 0
+    count_trees = 0
+    lines =  s.splitlines()
+    x, y = 0, 0
+    step_hor, step_vert = 3, 1
+    map_width = len(lines[0])
+    map_height = len(lines)
+    while y < map_height - 1:
+        x = (x + step_hor) % map_width
+        y += 1
+        #breakpoint()
+        if lines[y][x] == '#':
+            count_trees += 1
+
+    return count_trees
 
 
 @pytest.mark.parametrize(
