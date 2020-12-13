@@ -12,9 +12,9 @@ REQUIRED_FIELDS = frozenset(('byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'))
 def compute(s: str) -> int:
     count_valid = 0
     for passport in s.split('\n\n'):
-        fields_split = [s.strip().split(':') for s in passport.split()]
-        fieldkeys = set({k: v for k, v in fields_split}.keys())
-        if fieldkeys.issuperset(REQUIRED_FIELDS):
+        fields_list = [s.strip().split(':') for s in passport.split()]
+        fields = {k: v for k, v in fields_list}
+        if set(fields.keys()).issuperset(REQUIRED_FIELDS):
             count_valid += 1
     return count_valid
 
