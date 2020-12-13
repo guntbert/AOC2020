@@ -22,7 +22,7 @@ Here goes the example input
     (
         # put given test cases here
         (INPUT_S, 42), 
-    ,
+    )
 )
 def test(input_s: str, expected: int) -> None:
     assert compute(input_s) == expected
