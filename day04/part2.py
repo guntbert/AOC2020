@@ -81,7 +81,7 @@ def passport_is_valid(fields: Dict) -> bool:
     return True
 #    
 
-INPUT_S = '''\
+INPUT_S_INVALID = '''\
         eyr:1972 cid:100
 hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926
 
@@ -96,6 +96,8 @@ hgt:59cm ecl:zzz
 eyr:2038 hcl:74454a iyr:2023
 pid:3556412378 byr:2007
 
+'''
+INPUT_S_VALID = '''\
 pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
 hcl:#623a2f
 
@@ -111,6 +113,13 @@ iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719
 
 
 '''
+
+INPUT_S = INPUT_S_VALID + INPUT_S_INVALID
+
+# Preparation for testing passport_is_valid
+VALID_PASSPORTS = INPUT_S_VALID.split('\n\n')
+INVALID_PASSPORTS = INPUT_S_INVALID.split('\n\n')
+
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
@@ -121,6 +130,24 @@ iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719
 def test(input_s: str, expected: int) -> None:
     assert compute(input_s) == expected
 
+@pytest.mark.parametrize(
+        ('passport','expected'),
+        (
+            (VALID_PASSPORTS[0], True),
+            (VALID_PASSPORTS[1], True),
+            (VALID_PASSPORTS[2], True),
+            (VALID_PASSPORTS[3], True),
+
+            (INVALID_PASSPORTS[0], False),
+            (INVALID_PASSPORTS[1], False),
+            (INVALID_PASSPORTS[2], False),
+            (INVALID_PASSPORTS[3], False),
+            )
+        )
+def test_passport_is_valid(passport: str, expected: bool) -> None:
+        fields_list = [s.strip().split(':') for s in passport.split()]
+        fields = {k: v for k, v in fields_list}
+        assert passport_is_valid(fields) == expected
 
 def main() -> int:
     parser = argparse.ArgumentParser()
