@@ -55,12 +55,30 @@ def compute(s: str) -> int:
     return count_valid
 
 def passport_is_valid(fields: Dict) -> bool:
+    # breakpoint()
     if not set(fields.keys()).issuperset(REQUIRED_FIELDS):
         return False 
-    datecondition =   2020 <= int(fields['eyr']) <= 2030 and \
+    datecondition =   ( 2020 <= int(fields['eyr']) <= 2030 and \
            1920 <= int(fields['byr']) <= 2002 and \
-           2010 <= int(fields['iyr']) <= 2020 
-#    breakpoint()
+           2010 <= int(fields['iyr']) <= 2020 )
+    if not datecondition:
+        return False
+    if not re.match(r'\d{9}', fields['pid']):
+        return False
+    if not (\
+                (height_match := re.match(r'(\d+)(in|cm)$', fields['hgt'])) and \
+                (\
+                    ( height_match[2] == 'cm' and 150 <= int(height_match[1]) <= 193 ) or\
+                    ( height_match[2] == 'in' and 59 <= int(height_match[1]) <= 76 ) \
+                )\
+            ):
+        return False
+
+    if not re.match('#[0-9a-f]{6}', fields['hcl']):
+        return False
+    if not fields['ecl'] in set('amb blu brn gry grn hzl oth'.split()):
+        return False
+    return True
 #    
 
 INPUT_S = '''\
