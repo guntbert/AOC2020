@@ -57,10 +57,10 @@ def compute(s: str) -> int:
 def passport_is_valid(fields: Dict) -> bool:
     if not set(fields.keys()).issuperset(REQUIRED_FIELDS):
         return False 
-    breakpoint()
-    datecondition =   2020 <= int(fields['eyr'] <= 2030
-#           1920 <= int(fields['byr'] <= 2002 and 
-#           2010 <= int(fileds['iyr'] <= 2020 and
+    datecondition =   2020 <= int(fields['eyr']) <= 2030 and \
+           1920 <= int(fields['byr']) <= 2002 and \
+           2010 <= int(fields['iyr']) <= 2020 
+#    breakpoint()
 #    
 
 INPUT_S = '''\
