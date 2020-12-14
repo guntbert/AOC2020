@@ -2,6 +2,7 @@ import argparse
 import os.path
 import re
 import pytest
+import csv
 
 from support import timing
 from typing import Dict
@@ -47,11 +48,18 @@ REQUIRED_FIELDS = frozenset(('byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'))
 
 def compute(s: str) -> int:
     count_valid = 0
-    for passport in s.split('\n\n'):
-        fields_list = [s.strip().split(':') for s in passport.split()]
-        fields = {k: v for k, v in fields_list}
-        if passport_is_valid(fields):
-            count_valid += 1
+    fieldnames = sorted(REQUIRED_FIELDS)
+    fieldnames.append('cid')
+    with open('valid_passports.csv','w') as file:
+        writer = csv.DictWriter(file, fieldnames = fieldnames)
+        breakpoint()
+        writer.writeheader()
+        for passport in s.split('\n\n'):
+            fields_list = [s.strip().split(':') for s in passport.split()]
+            fields = {k: v for k, v in fields_list}
+            if passport_is_valid(fields):
+                count_valid += 1
+                writer.writerow((fields))
     return count_valid
 
 def passport_is_valid(fields: Dict) -> bool:
