@@ -71,7 +71,7 @@ def passport_is_valid(fields: Dict) -> bool:
            2010 <= int(fields['iyr']) <= 2020 )
     if not datecondition:
         return False
-    if not re.match(r'\d{9}', fields['pid']):
+    if not re.match(r'^\d{9}$', fields['pid']):
         return False
     if not (\
                 (height_match := re.match(r'(\d+)(in|cm)$', fields['hgt'])) and \
