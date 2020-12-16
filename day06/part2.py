@@ -11,13 +11,11 @@ INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
 
 def compute(s: str) -> int:
     count_yes_per_grup = 0
-    all_q_with_yes_from_everybody_in_group = set(string.ascii_lowercase)
     for group in s.split('\n\n'):
-        for individual_answers in group.split('\n'):
+        all_q_with_yes_from_everybody_in_group = set(string.ascii_lowercase)
+        for individual_answers in group.splitlines():
             all_q_with_yes_from_everybody_in_group &= (set(individual_answers))
         count_yes_per_grup += len(all_q_with_yes_from_everybody_in_group)
-        breakpoint()
-    # TODO: implement solution here!
     return count_yes_per_grup
 
 INPUT_S = '''\
