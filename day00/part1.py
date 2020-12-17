@@ -14,14 +14,17 @@ def compute(s: str) -> int:
     # TODO: implement solution here!
     return 0
 
+
 INPUT_S = '''\
 Here goes the example input
 '''
+
+
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
         # put given test cases here
-        (INPUT_S, 42), 
+        (INPUT_S, 42),
     )
 )
 def test(input_s: str, expected: int) -> None:

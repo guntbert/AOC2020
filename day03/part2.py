@@ -1,6 +1,5 @@
 import argparse
 import os.path
-
 from typing import List
 
 import pytest
@@ -23,6 +22,7 @@ INPUT_S = '''\
 .#..#...#.#
 '''
 
+
 def _compute(lines: List[str], x_step: int, y_step: int) -> int:
     count_trees = 0
     x, y = 0, 0
@@ -31,7 +31,7 @@ def _compute(lines: List[str], x_step: int, y_step: int) -> int:
     while y < map_height - 1:
         x = (x + x_step) % map_width
         y += y_step
-        #breakpoint()
+        # breakpoint()
         if lines[y][x] == '#':
             count_trees += 1
 
@@ -39,21 +39,21 @@ def _compute(lines: List[str], x_step: int, y_step: int) -> int:
 
 
 def compute(s: str) -> int:
-    lines =  s.splitlines()
+    lines = s.splitlines()
 
     return (
-            _compute( lines, 1, 1) *
-            _compute( lines, 3, 1) *
-            _compute( lines, 5, 1) *
-            _compute( lines, 7, 1) *
-            _compute( lines, 1, 2) 
-            )
+        _compute(lines, 1, 1) *
+        _compute(lines, 3, 1) *
+        _compute(lines, 5, 1) *
+        _compute(lines, 7, 1) *
+        _compute(lines, 1, 2)
+    )
 
 
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
-      (INPUT_S, 336),
+        (INPUT_S, 336),
     ),
 )
 def test(input_s: str, expected: int) -> None:

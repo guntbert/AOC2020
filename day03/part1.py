@@ -21,17 +21,18 @@ INPUT_S = '''\
 .#..#...#.#
 '''
 
+
 def compute(s: str) -> int:
     count_trees = 0
-    lines =  s.splitlines()
+    lines = s.splitlines()
     x, y = 0, 0
-    step_hor, step_vert = 3, 1
+    step_hor = 3
     map_width = len(lines[0])
     map_height = len(lines)
     while y < map_height - 1:
         x = (x + step_hor) % map_width
         y += 1
-        #breakpoint()
+        # breakpoint()
         if lines[y][x] == '#':
             count_trees += 1
 
@@ -41,7 +42,7 @@ def compute(s: str) -> int:
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
-      (INPUT_S, 7),
+        (INPUT_S, 7),
     ),
 )
 def test(input_s: str, expected: int) -> None:

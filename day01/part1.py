@@ -8,15 +8,15 @@ from support import timing
 def compute(s: str) -> int:
     numbers = [int(n_s) for n_s in s.split()]
     length = len(numbers)
-    #breakpoint()
-    for pos_n1, n1  in enumerate(numbers):
-      pos_n2 = pos_n1 + 1
-      while pos_n2 < length:
-        n2 = numbers[pos_n2]
-        if n1 + n2 == 2020:
-          return n1* n2
-        pos_n2 += 1
-         
+    # breakpoint()
+    for pos_n1, n1 in enumerate(numbers):
+        pos_n2 = pos_n1 + 1
+        while pos_n2 < length:
+            n2 = numbers[pos_n2]
+            if n1 + n2 == 2020:
+                return n1 * n2
+            pos_n2 += 1
+    raise AssertionError('should not be reached')
 
 
 @pytest.mark.parametrize(

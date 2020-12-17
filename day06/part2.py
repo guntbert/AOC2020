@@ -18,6 +18,7 @@ def compute(s: str) -> int:
         count_yes_per_group += len(all_q_with_yes_from_everybody_in_group)
     return count_yes_per_group
 
+
 INPUT_S = '''\
 abc
 
@@ -35,11 +36,13 @@ a
 
 b
 '''
+
+
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
         # put given test cases here
-        (INPUT_S, 6), 
+        (INPUT_S, 6),
     )
 )
 def test(input_s: str, expected: int) -> None:

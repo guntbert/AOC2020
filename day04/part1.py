@@ -9,6 +9,7 @@ INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
 
 REQUIRED_FIELDS = frozenset(('byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'))
 
+
 def compute(s: str) -> int:
     count_valid = 0
     for passport in s.split('\n\n'):
@@ -17,6 +18,7 @@ def compute(s: str) -> int:
         if set(fields.keys()).issuperset(REQUIRED_FIELDS):
             count_valid += 1
     return count_valid
+
 
 INPUT_S = '''\
 ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
@@ -33,11 +35,13 @@ hgt:179cm
 hcl:#cfa07d eyr:2025 pid:166559648
 iyr:2011 ecl:brn hgt:59in
 '''
+
+
 @pytest.mark.parametrize(
     ('input_s', 'expected'),
     (
         # put given test cases here
-        (INPUT_S, 2), 
+        (INPUT_S, 2),
     )
 )
 def test(input_s: str, expected: int) -> None:
