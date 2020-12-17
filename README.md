@@ -1,4 +1,4 @@
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/anthonywritescode/aoc2020/master.svg)](https://results.pre-commit.ci/latest/github/anthonywritescode/aoc2020/master)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 
 advent of code 2020
 ===================
